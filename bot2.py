@@ -22,6 +22,7 @@ database = Database(dbname,user,password,host,port)
 
 
 
+
 # -------------Bot
 TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
 bot = Bot(TOKEN)
@@ -144,13 +145,6 @@ async def callback_query_handler(call : CallbackQuery):
     
     
     
-
-
-
-
-
-
-
 
 
 
