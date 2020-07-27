@@ -98,6 +98,20 @@ async def text(message : Message):
         print(e)
         
 
+@dp.message_handler(content_types=['contact'])
+async def contact(message):
+    # --------Global variables
+    global interface
+    global database
+
+    database.add_contact(message.contact.phone_number,message.chat.id)
+
+    
+    result = database.quiz_result(message.chat.id)
+
+    await bot.send_message(chat_id=message.chat.id,text=result,parse_mode='html',reply_markup=None)
+    
+
 
 
 # -------------CallBackQueries
@@ -135,12 +149,11 @@ async def callback_query_handler(call : CallbackQuery):
             await send_photo(call.message.chat.id,photo,caption,keyboard)
 
         elif call.data in VARIATIONS[CATEGORIES[6]]:# season
-            data = database.quiz_result(call.message.chat.id)
-            print(data)
-
+            photo,caption,keyboard = interface.contact()
+            await send_photo(call.message.chat.id,photo,caption,keyboard)
+            
+            
     database.add_client_liking(call.message.chat.id,call.data)
-
-
     await bot.delete_message(call.message.chat.id,call.message.message_id)
     
     

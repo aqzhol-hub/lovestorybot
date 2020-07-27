@@ -172,7 +172,7 @@ class Interface():
         season_photo = 'static/questions/q7.jpg'
 
         season_message = {
-            True : """<b>Тойыңыз қай мезгілде?💍</b>""",
+            True   : """<b>Тойыңыз қай мезгілде?💍</b>""",
             False  : """<b>Когда у вас свадьба?💍</b>""",
         }
 
@@ -182,4 +182,22 @@ class Interface():
         }
 
         return season_photo, season_message[self.language], season_keybard[self.language]
+
+
+    def contact(self):
+
+        contact_photo = 'static/img/contact.jpeg'
+
+        contact_message = {
+            True  : """<b>Телефон номер жібер</b>""",
+            False : """<b>Отправь номер телефона</b>"""
+        }
+
+        contact_keyboard = {
+            True  : ReplyKeyboardMarkup(keyboard=[[KeyboardButton('Жіберу',request_contact=True)]],resize_keyboard=True),
+            False : ReplyKeyboardMarkup(keyboard=[[KeyboardButton('Отправить',request_contact=True)]],resize_keyboard=True)
+        }
+
+        return contact_photo, contact_message[self.language], contact_keyboard[self.language]        
+        
 

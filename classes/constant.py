@@ -12,6 +12,37 @@ VARIATIONS = {
         CATEGORIES[6] : ['spring', 'summer','fall', 'winter'],   # season
 }
 
+CHOICES = {
+    VARIATIONS[CATEGORIES[0]][0]:'Сценарий🕺',
+    VARIATIONS[CATEGORIES[0]][1]:'Образ🎭',
+    VARIATIONS[CATEGORIES[0]][2]:'Локация🏕',
+
+    VARIATIONS[CATEGORIES[1]][0]:'Классикалық👫',
+    VARIATIONS[CATEGORIES[1]][1]:'Динамикалық🏇',
+    VARIATIONS[CATEGORIES[1]][2]:'Экстремалды🏄‍♂️',
+
+    VARIATIONS[CATEGORIES[2]][0]:'Этно🧥',
+    VARIATIONS[CATEGORIES[2]][1]:'Классика🍷',
+    VARIATIONS[CATEGORIES[2]][2]:'Артхаус👩‍🎨',
+
+    VARIATIONS[CATEGORIES[3]][0]:'Мен',
+    VARIATIONS[CATEGORIES[3]][1]:'Сіз',
+    VARIATIONS[CATEGORIES[3]][2]:'Бірге',
+    
+    VARIATIONS[CATEGORIES[4]][0]:'Табиғат🏔',
+    VARIATIONS[CATEGORIES[4]][1]:'Қала🏙',
+    VARIATIONS[CATEGORIES[4]][2]:'Студия📸',
+
+    VARIATIONS[CATEGORIES[5]][0]:'100-150 мың',
+    VARIATIONS[CATEGORIES[5]][1]:'150-300 мың',
+    VARIATIONS[CATEGORIES[5]][2]:'300 мың және жоғары',
+
+    VARIATIONS[CATEGORIES[6]][0]:'Көктем🏞',
+    VARIATIONS[CATEGORIES[6]][1]:'Жаз☀️',
+    VARIATIONS[CATEGORIES[6]][2]:'Күз🍁',
+    VARIATIONS[CATEGORIES[6]][3]:'Қыс☃️'
+}
+
 INTERFACE_LANGUAGE = {'🇰🇿Қазақ тілі' : True,'🇷🇺Русский язык' : False}
 
 WELCOME_LANGUAGE = {
@@ -81,6 +112,14 @@ Client   = """
     );
 """
 
+Phone = """
+    create table if not exists Phone(
+        phone_id serial primary key,
+        phone_number varchar,
+        client_id int references Client(client_id) on delete cascade
+    );
+"""
+
 Quiz    = """
     create table if not exists Quiz(
         quiz_id serial primary key,
@@ -90,8 +129,9 @@ Quiz    = """
 
 Client_has_Variation = """
     create table if not exists Client_has_Variation(
-        chv serial primary key,
-        quiz_id int references Quiz(quiz_id) on delete cascade,
+        chv          serial         primary key,
+        quiz_id      int references Quiz    (quiz_id)       on delete cascade,
+        category_id  int references Category(category_id)   on delete cascade,
         variation_id int references Variation(variation_id) on delete cascade
     );
 """
@@ -111,7 +151,3 @@ Video_has_Variation = """
         variation_id int references Variation(variation_id) on delete cascade
     );
 """
-
-
-
-    
