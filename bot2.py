@@ -25,6 +25,7 @@ database = Database(dbname,user,password,host,port)
 
 # -------------Bot
 TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
+# TOKEN = '1300236281:AAFhQKebBujEHIlNN43r7xQ2YKtqWWzyy78'
 bot = Bot(TOKEN)
 dp = Dispatcher(bot)
 
@@ -73,6 +74,7 @@ async def text(message : Message):
             await send_photo(message.chat.id,photo,caption,keyboard)
             
         elif message.text == WELCOME_LANGUAGE[interface.language][2]:
+            await bot.send_message(message.chat.id,database.get_works(),parse_mode='html')
             pass
         elif message.text == WELCOME_LANGUAGE[interface.language][3]:#contact
             await bot.send_contact(chat_id=message.chat.id,phone_number='87714502817',first_name='Aqzhol', last_name='Yqylasfilms',vcard='19191919191919191919')
@@ -88,9 +90,9 @@ async def text(message : Message):
             
         elif message.text == WELCOME_LANGUAGE[interface.language][6]:
             await start(message)
-            pass
-        elif message.text == WELCOME_LANGUAGE[interface.language][7]:
-            pass
+            
+        # elif message.text == WELCOME_LANGUAGE[interface.language][7]:
+        #     pass
     
     try:
         await bot.delete_message(message.chat.id, message.message_id)
@@ -105,10 +107,12 @@ async def contact(message):
     global database
 
     database.add_contact(message.contact.phone_number,message.chat.id)
-
+    
+    animation, text, keyboard = interface.welcome()
+    img,text = database.result_client(message.chat.id)
+    await send_photo(message.chat.id,img,text,keyboard)
     
     result = database.quiz_result(message.chat.id)
-
     await bot.send_message(chat_id=message.chat.id,text=result,parse_mode='html',reply_markup=None)
     
 

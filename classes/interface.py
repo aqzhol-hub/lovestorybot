@@ -34,7 +34,7 @@ class Interface():
             [WELCOME_LANGUAGE[self.language][1],WELCOME_LANGUAGE[self.language][2]],
             [WELCOME_LANGUAGE[self.language][3],WELCOME_LANGUAGE[self.language][4]],
             [WELCOME_LANGUAGE[self.language][5],WELCOME_LANGUAGE[self.language][6]],
-            [WELCOME_LANGUAGE[self.language][7]]
+            # [WELCOME_LANGUAGE[self.language][7]]
         ],  resize_keyboard=True,one_time_keyboard=False
         )
 

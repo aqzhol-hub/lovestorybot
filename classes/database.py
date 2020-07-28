@@ -1,5 +1,49 @@
 from psycopg2 import connect
 
+query = """
+select DISTINCT v.video_name from Video v
+inner join Video_has_Variation vv
+on v.video_id = vv.video_id
+inner join Client_has_Variation cv on cv.variation_id = vv.variation_id
+where cv.quiz_id = %s
+"""
+
+
+
+lis = [
+    [23,[5,7,14]],
+    [22,[4,9,13,14]],
+    [21,[4,8,13]],
+    [20,[5,8,14]],
+    [19,[6,7,13,14]],
+    [17,[5,7,14]],
+    [16,[6,8,14]],
+    [15,[5,7,14]],
+    [14,[5,8,14]],
+    [13,[4,9,14,13]],
+    [12,[6,9,14,15]],
+    [11,[4,8,13]],
+    [10,[4,5,8,9,13,15]],
+    [9,[5,7,14]],
+    [8,[4,8,13,14]],
+    [7,[5,9,13,14]],
+    [6,[5,9,15]],
+    [5,[6,7,14,13]],
+    [3,[4,8,13]],
+    [2,[4,8,14,13]],
+    [1,[6,8,14]]
+]
+
+#style 456
+#form 789
+#location 13 14 15
+
+# ['classic',  'dynamic',  'extremely'],   # style
+# ['ethno',    'classica', 'arthouse' ],   # form
+# ['city',     'nature',   'studio'   ],   # location
+
+
+
 CATEGORIES = ['importance', 'style', 'form', 'producer', 'location', 'price','season']
 
 VARIATIONS = {
@@ -50,6 +94,12 @@ password = 'scuWJvr8CgsuGpkzgyC3YBsHVdz7cbED'
 host = 'rogue.db.elephantsql.com'
 port = '5432'
 
+connection = connect(dbname=dbname,user=user,password=password,host=host,port=port)
+cursor = connection.cursor()
+
+
+
+
 class Database():
 
 
@@ -59,6 +109,56 @@ class Database():
         self.connection = connect(dbname = dbname, user = user, password = password, host = host, port = port)
         self.cursor = self.connection.cursor()
 
+
+    def into(self):
+        for i in lis:
+            for j in i[1]:
+                try:
+                    with self.connection:
+                        self.cursor.execute("insert into Video_has_Variation(video_id,variation_id) values(%s,%s)",(i[0],j))
+                        self.connection.commit()
+                    print(i[0],j)
+                except Exception as e:
+                    print(e)
+                
+        
+
+
+    def fet(self,quiz_id):
+
+        li = [2,3,5]
+        tup = tuple()
+        for i in li:
+            try:
+                with self.connection:
+                    self.cursor.execute("select variation_id from Client_has_Variation where quiz_id = %s and category_id = %s",(quiz_id,i))
+                    tup += (self.cursor.fetchall()[-1][0],)
+            except Exception as e:
+                print(e)
+        return tup
+
+    def get(self,chat_id):
+
+        qq = """
+        select DISTINCT v.video_name,v.video_url from Video v,Video_has_Variation vv
+        where v.video_id = vv.video_id and vv.variation_id in (%s,%s,%s)
+        """
+        #ls.jpeg
+        varis = self.fet(self.__quiz_id(chat_id))
+        try:
+            with self.connection:
+                self.cursor.execute(qq,(varis[0],varis[1],varis[2]))
+                retur =   self.cursor.fetchall()[-3:]
+        except Exception as e:
+            print(e)
+        # print(retur)
+
+        result = ""
+        for i in retur:
+            result += """\n<a href="{1}">{0}</a>\n""".format(i[0],i[1])
+        return result
+
+        
     
     # --------Public methods
     def add_client(self,chat_id,first_name,last_name,username):
@@ -96,7 +196,8 @@ class Database():
                 self.connection.commit()
         except Exception as e:
             print(e)
-    
+
+   
 
     def quiz_result(self,chat_id):
 
@@ -110,19 +211,32 @@ class Database():
         )
         quiz_id = self.__quiz_id(chat_id)
         for i,j in enumerate(CATEGORIES):
-            # print(CHOICES[self.__variation_name(quiz_id,j)])
-            
-
             result += "<b>{0} сұрақ : {1}</b>\n".format(i+1,(CHOICES[self.__variation_name(quiz_id,j)]))
             
-        print(result)
         return result
-        # try:
-        #     with self.connection:
-        #         self.cursor.execute("select variation_name from Variation where variation_id in (select variation_id from Client_has_Variation where quiz_id = %s)", [self.__quiz_id(chat_id)])
-        #         return self.cursor.fetchall()
-        # except Exception as e:
-        #     print(e)
+
+    def result_client(self,chat_id):
+        return 'static/img/ls.jpeg',self.get(chat_id)
+
+    def get_works(self):
+        
+        try:
+            with self.connection:
+                self.cursor.execute("select video_name, video_url from Video")
+                result = self.cursor.fetchall()
+            from random import sample
+            result = sample(result,5)
+
+            data = ""
+            for i in result:
+                data += """\n<a href="{1}">{0}</a>\n""".format(i[0],i[1])
+            return data
+        except Exception as e:
+            print(e)
+        
+        
+
+        
     
         
 
@@ -154,6 +268,22 @@ class Database():
                 query = """
                 select 
                 v.variation_name from Variation v, Category c, Client_has_Variation cv
+                where c.category_name = %s and cv.quiz_id = %s 
+                and cv.category_id = c.category_id and cv.variation_id = v.variation_id
+                """
+                self.cursor.execute(query,(category_name,quiz_id))
+                return self.cursor.fetchall()[-1][0]
+        except Exception as e:
+            print(e)
+
+
+    def __variation_id_(self,quiz_id,category_name):
+
+        try:
+            with self.connection:
+                query = """
+                select 
+                v.variation_id from Variation v, Category c, Client_has_Variation cv
                 where c.category_name = %s and cv.quiz_id = %s 
                 and cv.category_id = c.category_id and cv.variation_id = v.variation_id
                 """
@@ -220,3 +350,7 @@ class Database():
         return keys[values.index([i for i in values if variation_name in i][0])]
 
 d = Database(dbname,user,password,host,port)
+
+
+
+

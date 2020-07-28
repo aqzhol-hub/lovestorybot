@@ -151,3 +151,21 @@ Video_has_Variation = """
         variation_id int references Variation(variation_id) on delete cascade
     );
 """
+
+query = """
+select v.video_name from Video v
+inner join Video_has_Variation vv
+on v.video_id = vv.video_id
+inner join Client_has_Variation cv on cv.variation_id = vv.variation_id
+"""
+
+
+qq1 = """
+select variation_id from Client_has_Variation 
+where quiz_id = %s and category_id = %s
+"""
+
+qq = """
+select DISTINCT v.video_name from Video v,Video_has_Variation vv
+where v.video_id = vv.video_id and where vv.variation_id = %s and variation_id = %s and variation_id = %s
+"""
