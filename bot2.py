@@ -32,7 +32,7 @@ dp = Dispatcher(bot)
 
 
 # -------------Functions
-async def send_photo(chat_id,photo,caption,keyboard=None):
+async def send_photo(chat_id,photo = 'static/img/logotype.jpeg',caption=None,keyboard=None):
     await bot.send_photo(chat_id=chat_id,photo=open(photo,'rb'),caption=caption,parse_mode='html',reply_markup=keyboard)
 
 
@@ -93,7 +93,16 @@ async def text(message : Message):
             
         # elif message.text == WELCOME_LANGUAGE[interface.language][7]:
         #     pass
-    
+
+    if message.text in LOVESTORY_KEYBOARD:
+        if message.text != LOVESTORY_KEYBOARD[-1]:
+            document, keyboard = interface.send_price()
+            photo,text = interface.each_price(message.text)
+            await send_photo(message.chat.id,photo,text,keyboard)
+        else:
+             animation, text, keyboard = interface.welcome()
+             await send_photo(chat_id=message.chat.id,keyboard=keyboard)
+        
     try:
         await bot.delete_message(message.chat.id, message.message_id)
     except Exception as e:
