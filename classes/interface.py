@@ -56,7 +56,7 @@ class Interface():
 
     def about_us(self):
         
-        return 'static/img/logo.png', ABOUT_US[self.language]
+        return 'static/img/logotype.jpeg', ABOUT_US[self.language]
 
     def send_price(self):
         keyboard = ReplyKeyboardMarkup(keyboard=[[LOVESTORY_KEYBOARD[0]],[LOVESTORY_KEYBOARD[1]],[LOVESTORY_KEYBOARD[2]],[LOVESTORY_KEYBOARD[3]]],resize_keyboard=True)
