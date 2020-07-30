@@ -24,9 +24,9 @@ database = Database(dbname,user,password,host,port)
 
 
 # -------------Bot
-# TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
+TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
 # TOKEN = '1300236281:AAFhQKebBujEHIlNN43r7xQ2YKtqWWzyy78'
-TOKEN = '1265307353:AAEZHrSyw6-AhWyXrZvMMuc0zxzYa2jGOD8'
+# TOKEN = '1265307353:AAEZHrSyw6-AhWyXrZvMMuc0zxzYa2jGOD8'
 bot = Bot(TOKEN)
 dp = Dispatcher(bot)
 
@@ -79,7 +79,8 @@ async def text(message : Message):
             await bot.send_message(message.chat.id,database.get_works(),parse_mode='html')
             pass
         elif message.text == WELCOME_LANGUAGE[interface.language][3]:#contact
-            await bot.send_contact(chat_id=message.chat.id,phone_number='87714502817',first_name='Aqzhol', last_name='Yqylasfilms',vcard='19191919191919191919')
+            await bot.send_contact(chat_id=message.chat.id,phone_number='87756508888',first_name='Yqylasfilms', last_name='LoveStory',vcard='19191919191919191919')
+            await bot.send_contact(chat_id=message.chat.id,phone_number='87056458888',first_name='Yqylasfilms', last_name='LoveStory',vcard='19191919191919191919')
 
         elif message.text == WELCOME_LANGUAGE[interface.language][4]:# address
             text,location = interface.office_address()
