@@ -79,8 +79,8 @@ async def text(message : Message):
             await bot.send_message(message.chat.id,database.get_works(),parse_mode='html')
             pass
         elif message.text == WELCOME_LANGUAGE[interface.language][3]:#contact
-            await bot.send_contact(chat_id=message.chat.id,phone_number='87756508888',first_name='Yqylasfilms', last_name='LoveStory',vcard='19191919191919191919')
-            await bot.send_contact(chat_id=message.chat.id,phone_number='87056458888',first_name='Yqylasfilms', last_name='LoveStory',vcard='19191919191919191919')
+            await bot.send_contact(chat_id=message.chat.id,phone_number='+77756508888',first_name='Yqylasfilms', last_name='LoveStory',vcard='19191919191919191919')
+            await bot.send_contact(chat_id=message.chat.id,phone_number='+77056458888',first_name='Yqylasfilms', last_name='LoveStory',vcard='19191919191919191919')
 
         elif message.text == WELCOME_LANGUAGE[interface.language][4]:# address
             text,location = interface.office_address()
