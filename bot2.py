@@ -24,9 +24,9 @@ database = Database(dbname,user,password,host,port)
 
 
 # -------------Bot
-# TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
+TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
 # TOKEN = '1300236281:AAFhQKebBujEHIlNN43r7xQ2YKtqWWzyy78'
-TOKEN = '1265307353:AAEZHrSyw6-AhWyXrZvMMuc0zxzYa2jGOD8'
+# TOKEN = '1265307353:AAEZHrSyw6-AhWyXrZvMMuc0zxzYa2jGOD8'
 bot = Bot(TOKEN)
 dp = Dispatcher(bot)
 
@@ -67,7 +67,8 @@ async def text(message : Message):
     if message.text in list(WELCOME_LANGUAGE.values())[0] or list(WELCOME_LANGUAGE.values())[1]:
         if   message.text == WELCOME_LANGUAGE[interface.language][0]:
             photo, caption = interface.about_us()
-            await send_photo(message.chat.id,photo=photo,caption=caption)
+            await send_photo(message.chat.id,photo=photo)
+            await bot.send_message(message.chat.id,text =caption,parse_mode='html')
             
         elif message.text == WELCOME_LANGUAGE[interface.language][1]:# start_quiz
             photo,caption,keyboard = interface.importance()
