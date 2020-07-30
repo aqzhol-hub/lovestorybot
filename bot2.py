@@ -24,9 +24,9 @@ database = Database(dbname,user,password,host,port)
 
 
 # -------------Bot
-TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
+# TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
 # TOKEN = '1300236281:AAFhQKebBujEHIlNN43r7xQ2YKtqWWzyy78'
-# TOKEN = '1265307353:AAEZHrSyw6-AhWyXrZvMMuc0zxzYa2jGOD8'
+TOKEN = '1265307353:AAEZHrSyw6-AhWyXrZvMMuc0zxzYa2jGOD8'
 bot = Bot(TOKEN)
 dp = Dispatcher(bot)
 
