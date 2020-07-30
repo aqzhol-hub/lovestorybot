@@ -50,13 +50,10 @@ WELCOME_LANGUAGE = {
         False : ['Про нас🎥','Пройти квиз🎯', 'Работы🎬', 'Контакты📞', 'Адресс🏢', 'Прайслист🗒', '🇰🇿 🔁 🇷🇺','Записаться на встречу👥']
 }
 
-PRICE_LIST_TYPE = {
-    True  : ['ТОЙ', 'LOVESTORY'],
-    False : ['СВАДЬБА', 'LOVESTORY']
-}
 
-LOVESTORY_PACKET = ['Classic', 'Premium', 'Exclusive']
-WEDDING_PACKET   = ['Standart', 'Silver', 'Gold']
+
+LOVESTORY_KEYBOARD = ['Classic 97000тг', 'Premium 197000тг', 'Exclusive 397000тг', '⬅']
+
 
 
 PRICE_LIST = {

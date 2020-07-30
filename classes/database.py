@@ -151,7 +151,6 @@ class Database():
                 retur =   self.cursor.fetchall()[-3:]
         except Exception as e:
             print(e)
-        # print(retur)
 
         result = ""
         for i in retur:

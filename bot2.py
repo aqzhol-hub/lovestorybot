@@ -85,8 +85,8 @@ async def text(message : Message):
             await bot.send_location(chat_id=message.chat.id,latitude=location[0],longitude=location[1])
 
         elif message.text == WELCOME_LANGUAGE[interface.language][5]:# price_list
-            document = interface.send_price()
-            await bot.send_document(chat_id=message.chat.id,document=document)
+            document,keyboard = interface.send_price()
+            await bot.send_document(chat_id=message.chat.id,document=document,reply_markup=keyboard)
             
         elif message.text == WELCOME_LANGUAGE[interface.language][6]:
             await start(message)

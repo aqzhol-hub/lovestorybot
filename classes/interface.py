@@ -58,7 +58,8 @@ class Interface():
         return 'static/img/logo.png', ABOUT_US[self.language]
 
     def send_price(self):
-        return open('static/files/price.pdf', 'rb')
+        keyboard = ReplyKeyboardMarkup(keyboard=[[PRICE_LIST[0]],[PRICE_LIST[1]],[PRICE_LIST[2]],[PRICE_LIST[3]]])
+        return open('static/files/price.pdf', 'rb'),keyboard
     
         
         
