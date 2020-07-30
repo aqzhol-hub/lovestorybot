@@ -63,7 +63,7 @@ class Interface():
         return open('static/files/price.pdf', 'rb'),keyboard
     
     def each_price(self,price):
-        return PRICE_KEYBOARD[price][0],PRICE_KEYBOARD[price][1]
+        return PRICE_KEYBOARD[price][0],PRICE_KEYBOARD[price][1][self.language]
         
         
         
