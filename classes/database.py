@@ -215,7 +215,7 @@ class Database():
         return result
 
     def result_client(self,chat_id):
-        return 'static/img/ls.jpeg',self.get(chat_id)
+        return 'static/img/ls.jpg',self.get(chat_id)
 
     def get_works(self):
         
