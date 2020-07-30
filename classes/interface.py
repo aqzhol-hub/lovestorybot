@@ -191,7 +191,7 @@ class Interface():
 
     def contact(self):
 
-        contact_photo = 'static/img/contact.jpeg'
+        contact_photo = 'static/img/contact.jpg'
 
         contact_message = {
             True  : """<b>Телефон нөмеріңізді жіберіңіз. Және біз жауаптарыңызға байланысты сізге тегін консультация жүргізетін боламыз. 🤗</b>""",
