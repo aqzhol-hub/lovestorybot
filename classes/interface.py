@@ -55,6 +55,7 @@ class Interface():
         return ADDRESS_TEXT[self.language], [43.209661,76.856789]
 
     def about_us(self):
+        
         return 'static/img/logo.png', ABOUT_US[self.language]
 
     def send_price(self):
@@ -198,8 +199,8 @@ class Interface():
         }
 
         contact_keyboard = {
-            True  : ReplyKeyboardMarkup(keyboard=[[KeyboardButton('Жіберу',request_contact=True)]],resize_keyboard=True),
-            False : ReplyKeyboardMarkup(keyboard=[[KeyboardButton('Отправить',request_contact=True)]],resize_keyboard=True)
+            True  : ReplyKeyboardMarkup(keyboard=[[KeyboardButton('Жіберу📞',request_contact=True)]],resize_keyboard=True),
+            False : ReplyKeyboardMarkup(keyboard=[[KeyboardButton('Отправить📞',request_contact=True)]],resize_keyboard=True)
         }
 
         return contact_photo, contact_message[self.language], contact_keyboard[self.language]        
