@@ -1,5 +1,0 @@
-aiodns==2.0.0
-aiogram==2.8
-aiohttp==3.6.2
-asyncio==3.4.3
-psycopg2-binary==2.8.5

@@ -9,6 +9,10 @@ from classes.constant import *
 
 
 
+admins  = [626420006,508774864,318364070, 269903576,557795357]
+
+
+
 # -------------Connection
 dbname = 'puttgvir'
 user = 'puttgvir'
@@ -125,7 +129,11 @@ async def contact(message):
     await send_photo(message.chat.id,img,text,keyboard)
     
     result = database.quiz_result(message.chat.id)
-    await bot.send_message(chat_id=626420006,text=result,parse_mode='html',reply_markup=None)
+    for i in admins:
+        try:
+            await bot.send_message(chat_id=i,text=result,parse_mode='html',reply_markup=None)
+        except Exception as e:
+            print(e)
     
 
 
