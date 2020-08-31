@@ -185,65 +185,7 @@ async def callback_query_handler(call : CallbackQuery):
     await bot.delete_message(call.message.chat.id,call.message.message_id)
     
     
-    
 
-## ---------------------------------------------------------------------------
-'''
-from classes.backup import Backup
-backup_ = Backup(dbname='bwchdrqt',user='bwchdrqt',password='RG-J81AL2qo2RuWnmICMtoyulig6maOu',host='rogue.db.elephantsql.com',port='5432')
-sql_tables = [
-    'moderator_moderator', 'moderator_moderator_subjects',
-    'moderator_moderatorhistory', 'root_answer',
-    'root_category', 'root_numeration',
-    'root_question', 'root_subject', 'root_texts', 'root_topic'
-]
-
-admins_ = [626420006,888360912,654499426]
-
-async def report():
-    now =  datetime.now()
-    text = '<i>{0}_{1}_{2}_{3}_{4}_{5}</i>\n<b>Report made!!!</b>'.format(now.year,now.month,now.day,now.hour,now.minute,now.second)
-
-    for i in admins_:
-        try:
-            await bot.send_photo(chat_id=i,photo=open('static/imgg/report.png','rb'),caption=text,parse_mode='html')
-        except Exception as e:
-            print(e)
-
-async def make_backup(table_name):
-    path = await backup_.backup(table_name)
-
-    for i in admins_:
-        try:
-            await bot.send_document(chat_id=i,document=open(path,'rb'),disable_notification=True)
-        except Exception as e:
-            print(e)
-
-
-async def scheduler():
-
-    
-    schedule.every.day.at("21:00").do(lambda : make_backup(sql_tables[0]))
-    schedule.every.day.at("21:10").do(lambda : make_backup(sql_tables[1]))
-    schedule.every.day.at("21:20").do(lambda : make_backup(sql_tables[2]))
-    schedule.every.day.at("21:30").do(lambda : make_backup(sql_tables[3]))
-    schedule.every.day.at("21:40").do(lambda : make_backup(sql_tables[4]))
-    schedule.every.day.at("21:50").do(lambda : make_backup(sql_tables[5]))
-    schedule.every.day.at("22:00").do(lambda : make_backup(sql_tables[6]))
-    schedule.every.day.at("22:10").do(lambda : make_backup(sql_tables[7]))
-    schedule.every.day.at("22:20").do(lambda : make_backup(sql_tables[8]))
-    schedule.every.day.at("22:30").do(lambda : make_backup(sql_tables[9]))
-    schedule.every.day.at("12:43").do(lambda : make_backup(sql_tables[9]))
-
-    schedule.every.day.at("22:40").do(lambda : report())
-    
-    
-    while True:
-        await schedule.run_pending()
-        await asyncio.sleep(1)
-
-    
-'''
 # -------------Driver
 if __name__ == "__main__":
     # dp.loop.create_task(scheduler())
