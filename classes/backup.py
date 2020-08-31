@@ -31,7 +31,7 @@ class Backup():
         now = datetime.now()
         token = token_urlsafe(4)
         filename = '{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}.csv'.format(now.year,now.month,now.day,now.hour,now.minute,now.second,token,table_name)
-        path = BASE_DIR + '/static/files/' + filename
+        path = BASE_DIR + '/static/filess/' + filename
 
         columns, result = await self._select(table_name)
         
@@ -43,4 +43,4 @@ class Backup():
 
             return path
         except Exception as e:
-            return 'static/img/error.png'
+            return 'static/imgg/error.png'

@@ -30,6 +30,7 @@ database = Database(dbname,user,password,host,port)
 
 
 
+
 # -------------Bot
 # TOKEN = '1251528088:AAECXGaHJx7J7PsDPKsot5rpWlThNN-hpuw'
 # TOKEN = '1300236281:AAFhQKebBujEHIlNN43r7xQ2YKtqWWzyy78'
@@ -187,6 +188,7 @@ async def callback_query_handler(call : CallbackQuery):
     
 
 ## ---------------------------------------------------------------------------
+'''
 from classes.backup import Backup
 backup_ = Backup(dbname='bwchdrqt',user='bwchdrqt',password='RG-J81AL2qo2RuWnmICMtoyulig6maOu',host='rogue.db.elephantsql.com',port='5432')
 sql_tables = [
@@ -198,14 +200,13 @@ sql_tables = [
 
 admins_ = [626420006,888360912,654499426]
 
-
 async def report():
     now =  datetime.now()
     text = '<i>{0}_{1}_{2}_{3}_{4}_{5}</i>\n<b>Report made!!!</b>'.format(now.year,now.month,now.day,now.hour,now.minute,now.second)
 
     for i in admins_:
         try:
-            await bot.send_photo(chat_id=i,photo=open('static/img/report.png','rb'),caption=text,parse_mode='html')
+            await bot.send_photo(chat_id=i,photo=open('static/imgg/report.png','rb'),caption=text,parse_mode='html')
         except Exception as e:
             print(e)
 
@@ -221,7 +222,7 @@ async def make_backup(table_name):
 
 async def scheduler():
 
-    # '''
+    
     schedule.every.day.at("21:00").do(lambda : make_backup(sql_tables[0]))
     schedule.every.day.at("21:10").do(lambda : make_backup(sql_tables[1]))
     schedule.every.day.at("21:20").do(lambda : make_backup(sql_tables[2]))
@@ -234,16 +235,15 @@ async def scheduler():
     schedule.every.day.at("22:30").do(lambda : make_backup(sql_tables[9]))
 
     schedule.every.day.at("22:40").do(lambda : report())
-    # '''
-
+    
     
     while True:
         await schedule.run_pending()
         await asyncio.sleep(1)
 
     
-
+'''
 # -------------Driver
 if __name__ == "__main__":
-    dp.loop.create_task(scheduler())
+    # dp.loop.create_task(scheduler())
     executor.start_polling(dp,skip_updates=True)
