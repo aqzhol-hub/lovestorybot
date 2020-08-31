@@ -188,7 +188,7 @@ async def callback_query_handler(call : CallbackQuery):
     
 
 ## ---------------------------------------------------------------------------
-# '''
+'''
 from classes.backup import Backup
 backup_ = Backup(dbname='bwchdrqt',user='bwchdrqt',password='RG-J81AL2qo2RuWnmICMtoyulig6maOu',host='rogue.db.elephantsql.com',port='5432')
 sql_tables = [
@@ -243,8 +243,8 @@ async def scheduler():
         await asyncio.sleep(1)
 
     
-# '''
+'''
 # -------------Driver
 if __name__ == "__main__":
-    dp.loop.create_task(scheduler())
+    # dp.loop.create_task(scheduler())
     executor.start_polling(dp,skip_updates=True)
