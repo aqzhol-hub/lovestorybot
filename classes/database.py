@@ -88,14 +88,14 @@ CHOICES = {
 }
 
 
-dbname = 'puttgvir'
-user = 'puttgvir'
-password = 'scuWJvr8CgsuGpkzgyC3YBsHVdz7cbED'
-host = 'rogue.db.elephantsql.com'
-port = '5432'
+# dbname = 'puttgvir'
+# user = 'puttgvir'
+# password = 'scuWJvr8CgsuGpkzgyC3YBsHVdz7cbED'
+# host = 'rogue.db.elephantsql.com'
+# port = '5432'
 
-connection = connect(dbname=dbname,user=user,password=password,host=host,port=port)
-cursor = connection.cursor()
+# connection = connect(dbname=dbname,user=user,password=password,host=host,port=port)
+# cursor = connection.cursor()
 
 
 
@@ -348,7 +348,7 @@ class Database():
         keys = list(variations.keys())
         return keys[values.index([i for i in values if variation_name in i][0])]
 
-d = Database(dbname,user,password,host,port)
+# d = Database(dbname,user,password,host,port)
 
 
 
