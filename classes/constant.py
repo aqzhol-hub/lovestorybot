@@ -52,7 +52,7 @@ WELCOME_LANGUAGE = {
 
 
 
-LOVESTORY_KEYBOARD = ['Classic 97000тг', 'Premium 197000тг', 'Exclusive 397000тг', '⬅']
+LOVESTORY_KEYBOARD = ['Classic 167000тг', 'Premium 287000тг', 'Exclusive 497000тг', '⬅']
 
 PRICE_KEYBOARD = {
     LOVESTORY_KEYBOARD[0]:[
