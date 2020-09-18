@@ -188,5 +188,4 @@ async def callback_query_handler(call : CallbackQuery):
 
 # -------------Driver
 if __name__ == "__main__":
-    # dp.loop.create_task(scheduler())
     executor.start_polling(dp,skip_updates=True)

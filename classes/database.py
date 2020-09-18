@@ -146,6 +146,7 @@ class Database():
         """
         #ls.jpeg
         varis = self.fet(self.__quiz_id(chat_id))
+        retur = ''
         try:
             with self.connection:
                 self.cursor.execute(qq,(varis[0],varis[1],varis[2]))
